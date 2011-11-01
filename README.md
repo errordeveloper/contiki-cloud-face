@@ -22,14 +22,8 @@ to be a collection of different things.
 This repository is currently intended to be installed as submodule of
 `git://github.com/errordeveloper/contiki-projects.git` as `cloud-face`
 in the top-level directory, while `contiki-projects` is intended as
-submodule of Contiki tree (as `projects` in top-level directory.
-
-To get started do forget to `git submodule init && git submodule update`
-and then do this (I'll put a makefile for all this shortly) -
-
-		cd node_modules/handlebars/
-		node ../jison/bin/jison src/handlebars.yy src/handlebars.l
-		mv handlebars.js lib/handlebars/compiler/parser.js
+submodule of Contiki tree (as `projects` in top-level directory).
+To fetch all of the dependencies, please run `make update`.
 
 ### Notes:
 
