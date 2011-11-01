@@ -24,6 +24,13 @@ This repository is currently intended to be installed as submodule of
 in the top-level directory, while `contiki-projects` is intended as
 submodule of Contiki tree (as `projects` in top-level directory.
 
+To get started do forget to `git submodule init && git submodule update`
+and then do this (I'll put a makefile for all this shortly) -
+
+		cd node_modules/handlebars/
+		node ../jison/bin/jison src/handlebars.yy src/handlebars.l
+		mv handlebars.js lib/handlebars/compiler/parser.js
+
 ### Notes:
 
 I might remove the word Contiki from the title, but it is currently
@@ -44,4 +51,5 @@ a minimum size of HTML code to the browser, point it to a short URL
 with JavaScript source and call just one function that will pass a
 piece of JSON-formated data to the client which will generate a pretty
 page with extra features if desired.
+
 
