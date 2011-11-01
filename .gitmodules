@@ -10,3 +10,12 @@
 [submodule "node_modules/uglify-js"]
 	path = node_modules/uglify-js
 	url = git://github.com/mishoo/UglifyJS.git
+[submodule "node_modules/jison"]
+	path = node_modules/jison
+	url = git://github.com/zaach/jison.git
+[submodule "node_modules/nomnom"]
+	path = node_modules/nomnom
+	url = git://github.com/harthur/nomnom.git
+[submodule "node_modules/underscore"]
+	path = node_modules/underscore
+	url = git://github.com/documentcloud/underscore.git
