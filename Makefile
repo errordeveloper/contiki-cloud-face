@@ -35,4 +35,8 @@ export/handlebars.min.js :
 	$(UGLIFYJS) handlebars.js > handlebars.min.js && \
 	$(UGLIFYJS) handlebars.vm.js > handlebars.vm.min.js
 
+export/cui2.js : lib_ui.js
+	printf "\n/* $< */\n" | \
+		cat ../export/handlebars.min.js - $< > $@
+
 .PHONY : node_modules node_modules/handlebars export/handlebars.min.js
