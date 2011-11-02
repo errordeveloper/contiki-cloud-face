@@ -17,4 +17,22 @@ node_modules/handlebars :
 	mv ./handlebars.js \
 	  ./lib/handlebars/compiler/parser.js
 
-.PHONY : node_modules node_modules/handlebars
+## Not too sure which way would be better, but for now
+## it will do just fine! Refoctor whent it gets complex.
+# HANDLEBARS_DIST_DIR = node_modules/handlebars/dist/
+# HANDLEBARS_DIST = handlebars.js handlebars.vm.js
+
+HANDLEBARS_DIST = node_modules/handlebars/dist/handlebars.js
+HANDLEBARS_DIST_VM = node_modules/handlebars/dist/handlebars.vm.js
+
+export/handlebars.min.js :
+	-mkdir export
+	cd node_modules/handlebars/ && \
+	rake -f ../../Rakefile.handlebars release && \
+	cd ../../ && \
+	mv $(HANDLEBARS_DIST) $(HANDLEBARS_DIST_VM) export/ && \
+	cd export/ && \
+	$(UGLIFYJS) handlebars.js > handlebars.min.js && \
+	$(UGLIFYJS) handlebars.vm.js > handlebars.vm.min.js
+
+.PHONY : node_modules node_modules/handlebars export/handlebars.min.js
