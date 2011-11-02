@@ -25,7 +25,7 @@ node_modules/handlebars :
 HANDLEBARS_DIST = node_modules/handlebars/dist/handlebars.js
 HANDLEBARS_DIST_VM = node_modules/handlebars/dist/handlebars.vm.js
 
-export/handlebars.min.js :
+export/handlebars.min.js : node_modules/handlebars
 	-mkdir export
 	cd node_modules/handlebars/ && \
 	rake -f ../../Rakefile.handlebars release && \
@@ -35,8 +35,8 @@ export/handlebars.min.js :
 	$(UGLIFYJS) handlebars.js > handlebars.min.js && \
 	$(UGLIFYJS) handlebars.vm.js > handlebars.vm.min.js
 
-export/cui2.js : lib_ui.js
+export/cui2.js : lib_ui/lib_ui.js export/handlebars.min.js
 	printf "\n/* $< */\n" | \
-		cat ../export/handlebars.min.js - $< > $@
+		cat export/handlebars.min.js - $< > $@
 
 .PHONY : node_modules node_modules/handlebars export/handlebars.min.js
