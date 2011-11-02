@@ -1,3 +1,5 @@
+# Notes on reply header optimisation with Nginx proxy
+
 I can see this:
 
                   % curl -6 http://localhost:82/feeds/504.csv -v
@@ -32,23 +34,28 @@ I can see this:
                   * Closing connection #0
                   6,2011-11-02T18:07:09.396577Z,-28307
 
-May be it could be squized down to at least this:
+May be it could be squized down!
+This is we'd like to have:
 
-                  % curl -6 http://localhost:82/feeds/504.csv -v
-                  * About to connect() to localhost port 82 (#0)
-                  *   Trying ::1... connected
-                  * Connected to localhost (::1) port 82 (#0)
-                  > GET /feeds/504.csv HTTP/1.1
-                  > User-Agent: curl/7.21.4 (x86_64-pc-linux-gnu) libcurl/7.21.4 GnuTLS/2.10.5 zlib/1.2.5 libidn/1.22
-                  > Host: localhost:82
-                  > Accept: */*
-                  >
                   < HTTP/1.1 200 OK
-                  < Server: nginx/1.0.6
                   < Content-Type: text/plain; charset=utf-8
                   < Connection: keep-alive
                   < Content-Length: 232
                   <
+
+But this is what Nginx can do:
+
+                  < HTTP/1.1 200 OK
+                  < Server: nginx/1.0.6
+                  < Date: Wed, 02 Nov 2011 21:47:05 GMT
+                  < Content-Type: text/plain; charset=utf-8
+                  < Connection: keep-alive
+                  < Content-Length: 22
+                  <
+
+Well, this is the actual content:
+(No need to change that at all)
+
                   0,2011-11-02T18:07:09.396577Z,18
                   1,2011-11-02T18:07:09.396577Z,93
                   2,2011-11-02T18:07:09.396577Z,292
@@ -58,6 +65,8 @@ May be it could be squized down to at least this:
                   * Connection #0 to host localhost left intact
                   * Closing connection #0
                   6,2011-11-02T18:07:09.396577Z,-28307
+
+## Comments
 
 I doubt that these will be needed:
 
