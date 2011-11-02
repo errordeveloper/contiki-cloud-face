@@ -39,5 +39,5 @@ function gen_ui (ui_class, context) {
   t.appendChild(document.createTextNode(use_ui.title));
   h.appendChild(t);
 
-  document.writeln(template(context));
+  document.writeln(template(JSON.stringify(context)));
 };
