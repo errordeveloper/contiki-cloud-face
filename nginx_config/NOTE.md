@@ -81,3 +81,10 @@ I really don't think that this could be used by a node:
 There is hardly any use for this either:
 
                   < Cache-Control: max-age=5
+
+Nevertheless, Nginx seem to ignore these settings:
+
+                  proxy_hide_header Date;
+                  proxy_hide_header Server;
+
+I imagine it wants to be compliant to the HTTP specification!
