@@ -19,3 +19,6 @@
 [submodule "node_modules/underscore"]
 	path = node_modules/underscore
 	url = git://github.com/documentcloud/underscore.git
+[submodule "node_modules/request"]
+	path = node_modules/request
+	url = git://github.com/mikeal/request.git
