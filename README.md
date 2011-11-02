@@ -66,4 +66,13 @@ it provides a local logging facility, which is very handy for any
 debugging or whatever. Perhaps we could also shorten URLs and do
 anything else whatever it is good for :)
 
+I find it quite handy to have this line in the `/etc/sudoers`:
+
+            errordeveloper    ALL=(ALL) NOPASSWD: /usr/sbin/nginx
+
+I also define this alias (Csh syntax):
+
+            alias nginx sudo /usr/sbin/nginx -p `pwd`/
+
+
 [Pachube]: http://www.pachube.com/
