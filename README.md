@@ -3,7 +3,7 @@
 
 _This repository is intended to hold all dependencies for any code that is required
 to build robust services and interfaces to what's now called "the cloud", also known
-as the WWW. The "Smart Objects" are refered to what is often title "wireless sensor
+as the WWW. The "Smart Objects" are refered to what is often titled "wireless sensor
 nodes" that leads to the term "Internet of Things". This said to explain why have I
 picked such a title - "The Cloud Face for Wireless Smart Objects"._
 
@@ -16,6 +16,8 @@ to be a collection of different things.
 
 ### Directories:
 - `node_modules` -- contain all packages required for Node.js parts
+- [`lib_ui`](#lib_ui.js)
+- [`nginx_config`](#nginx)
 
 ### Installation:
 
@@ -46,4 +48,22 @@ with JavaScript source and call just one function that will pass a
 piece of JSON-formated data to the client which will generate a pretty
 page with extra features if desired.
 
+To build a script called `export/cui.js` you can just run `make` in
+`lib_ui` directory and then can test it by loading `test.html` in a
+browser. The `cui.js` is a combined version of `handlebars.min.js`
+and `lib_ui.js`, that is to save some bandwidth. I have a plan to
+implement a pre-processor for [Handlebars][] at some point, but that
+is not working the way I tried (see `lib_ui/todo`).
 
+[Handlebars]: http://www.handlebarsjs.com/
+
+### `nginx`
+
+Here will be a collection of [`nginx`](http://nginx.org/) configs.
+One to start with is a IPv6 proxy for fake-local [Pachube][] API
+server, that is to avoid tunnelling IPv6 over IPv4. Additionally
+it provides a local logging facility, which is very handy for any
+debugging or whatever. Perhaps we could also shorten URLs and do
+anything else whatever it is good for :)
+
+[Pachube]: http://www.pachube.com/
