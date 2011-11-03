@@ -1,5 +1,6 @@
 function sel_ui (ui_class) {
   var classes = {
+    // TODO: Implement shorthand
     'border_router': {
       template :'<h3>Neighbors:</h3>'
                +'<ul class="neighbors_list">'
