@@ -9,6 +9,9 @@ import :
 	@git submodule init && \
 	git submodule update && \
         grep -q master .gh-pages/.git/config && \
+        $(MAKE) gh-pages-submodule-tweak
+
+gh-pages-submodule-tweak :
 	cd .gh-pages && \
 	git checkout origin/gh-pages -b gh-pages && \
 	git branch -d master
