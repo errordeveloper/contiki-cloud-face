@@ -1,5 +1,4 @@
 alias.csh
-export/
 log/
 node_scripts/config.json
 nginx_config/private/

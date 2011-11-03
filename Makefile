@@ -25,23 +25,23 @@ node_modules/handlebars :
 HANDLEBARS_DIST = node_modules/handlebars/dist/handlebars.js
 HANDLEBARS_DIST_VM = node_modules/handlebars/dist/handlebars.vm.js
 
-export/new/handlebars.min.js : node_modules/handlebars
-	-mkdir -p export/new/
+EXPORT = .gh-pages/export
+
+$(EXPORT)/handlebars.min.js : node_modules/handlebars
 	cd node_modules/handlebars/ && \
 	rake -f ../../Rakefile.handlebars release && \
 	cd ../../ && \
-	mv $(HANDLEBARS_DIST) $(HANDLEBARS_DIST_VM) export/new/ && \
-	cd export/new/ && \
+	mv $(HANDLEBARS_DIST) $(HANDLEBARS_DIST_VM) $(EXPORT) && \
+	cd $(EXPORT) && \
 	$(UGLIFYJS) handlebars.js > handlebars.min.js && \
 	$(UGLIFYJS) handlebars.vm.js > handlebars.vm.min.js
 
-export/new/cui.js : lib_ui/lib_ui.js export/new/handlebars.min.js
+$(EXPORT)/cui.js : lib_ui/lib_ui.js $(EXPORT)/handlebars.min.js
 	printf "\n/* $< */\n" | \
-		cat export/new/handlebars.min.js - $< > $@
+		cat $(EXPORT)/handlebars.min.js - $< > $@
 
-export-push : export/new/cui.js
-	git checkout gh-pages && \
-	cd export && mv new/* ./ && \
+export-push : $(EXPORT)/cui.js
+	cd $(EXPORT) && \
 	git status
 
-.PHONY : node_modules node_modules/handlebars export/handlebars.min.js
+.PHONY : node_modules node_modules/handlebars $(EXPORT)/handlebars.min.js

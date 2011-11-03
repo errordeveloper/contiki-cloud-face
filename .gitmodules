@@ -22,3 +22,6 @@
 [submodule "node_modules/request"]
 	path = node_modules/request
 	url = git://github.com/mikeal/request.git
+[submodule ".gh-pages"]
+	path = .gh-pages
+	url = git@github.com:/errordeveloper/contiki-cloud-face.git
