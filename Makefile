@@ -1,13 +1,14 @@
-update :
-	$(MAKE) node_modules
-	$(MAKE) node_modules/handlebars
-
 JISON = node $(shell pwd)/node_modules/jison/bin/jison
 HANDLEBARS = node $(shell pwd)/node_modules/handlebars/bin/handlebars
 UGLIFYJS = node $(shell pwd)/node_modules/uglify-js/bin/uglifyjs
 
-node_modules :
-	@git submodule init && git submodule update
+import :
+	@git submodule init && \
+	git submodule update && \
+	$(MAKE) node_modules/handlebars && \
+	cd .gh-pages && \
+	git checkout origin/gh-pages -b gh-pages && \
+	git branch -d master
 
 node_modules/handlebars :
 	cd $@ && \
