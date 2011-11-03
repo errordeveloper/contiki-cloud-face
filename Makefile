@@ -8,6 +8,7 @@ UGLIFYJS = node $(shell pwd)/node_modules/uglify-js/bin/uglifyjs
 import :
 	@git submodule init && \
 	git submodule update && \
+        grep -q master .gh-pages/.git/config && \
 	cd .gh-pages && \
 	git checkout origin/gh-pages -b gh-pages && \
 	git branch -d master
