@@ -43,5 +43,7 @@ function gen_ui (ui_class, context) {
   t.appendChild(document.createTextNode(use_ui.title));
   h.appendChild(t);
 
-  document.writeln(template(JSON.stringify(context)));
+  /* It's a bit odd, but doesn't look like we need JSON! */
+  // document.writeln(template(JSON.stringify(context)));
+  document.writeln(template(context));
 };
