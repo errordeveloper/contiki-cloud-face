@@ -22,7 +22,35 @@ function sel_ui (ui_class) {
         'list_routes': function() { return function(v) { if (v.toString() !== '')
           return '<li><pre>'+v[0]+'/'+v[1]+' via '+v[2]+' ('+v[3]+'s)</pre></li>'; }}
       }
-    }
+    },
+    'border_router_test': {
+      template :'<h3>Neighbors:</h3>'
+               +'<ul class="neighbors_list">'
+               +'  {{#each n}}'
+               +'  {{{list_nodes this}}}'
+               +'  {{/each}}'
+               +'</ul>'
+               +'<h3>Routes:</h3>'
+               +'<ul class="routes_list">'
+               +'  {{#each r}}'
+               +'  {{{list_routes this}}}'
+               +'  {{/each}}'
+               +'</ul>'
+               ,
+      title : 'Contiki Border Router',
+      helpers : {
+        /* Add ticks and some action buttons which will generate a query to
+         * a) get the records for each node from Pachube
+         * b) display further actions if records are available
+         * ?) TBD: how many more steps and features we want?
+         * ?) display graphs obtained from Pachube :)
+         */
+        'list_nodes': function() { return function(v) { if (v.toString() !== '')
+          return '<li><pre>'+v+'</pre><</li>'; }},
+        /* XXX: what can be done with the routes here? Any graphing needed? */
+        'list_routes': function() { return function(v) { if (v.toString() !== '')
+          return '<li><pre>'+v[0]+'/'+v[1]+' via '+v[2]+' ('+v[3]+'s)</pre></li>'; }}
+      }
   }
   return classes[ui_class];
 };
