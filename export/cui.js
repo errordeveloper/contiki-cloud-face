@@ -3,6 +3,7 @@ var Handlebars={};Handlebars.VERSION="1.0.beta.2",Handlebars.helpers={},Handleba
 /* lib_ui/lib_ui.js */
 function sel_ui (ui_class) {
   var classes = {
+    // TODO: Implement shorthand
     'border_router': {
       template :'<h3>Neighbors:</h3>'
                +'<ul class="neighbors_list">'
