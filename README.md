@@ -48,12 +48,9 @@ with JavaScript source and call just one function that will pass a
 piece of JSON-formated data to the client which will generate a pretty
 page with extra features if desired.
 
-To build a script called `export/cui.js` you can just run `make` in
-`lib_ui` directory and then can test it by loading `test.html` in a
-browser. The `cui.js` is a combined version of `handlebars.min.js`
-and `lib_ui.js`, that is to save some bandwidth. I have a plan to
-implement a pre-processor for [Handlebars][] at some point, but that
-is not working the way I tried (see `lib_ui/todo`).
+I have started by trying out [Handlebars][], but now I have no plans
+for using any silly templates, I am currently working on a decent
+implementaion with JQuery.
 
 [Handlebars]: http://www.handlebarsjs.com/
 
