@@ -25,11 +25,12 @@ function sel_ui (ui_class) {
     },
     'border_router_test': {
       template :'<h3>Neighbors:</h3>'
-               +'<ul class="neighbors_list">'
+               +'<ul class="nodes_list">'
                +'  {{#each n}}'
                +'  {{{list_nodes this}}}'
                +'  {{/each}}'
                +'</ul>'
+               +'<div></div>'
                +'<h3>Routes:</h3>'
                +'<ul class="routes_list">'
                +'  {{#each r}}'
@@ -46,11 +47,15 @@ function sel_ui (ui_class) {
          * ?) display graphs obtained from Pachube :)
          */
         'list_nodes': function() { return function(v) { if (v.toString() !== '')
-          return '<li><pre>'+v+'</pre><</li>'; }},
+          return '<li id=\''+v+'\'><pre>'+v+'</pre>'
+            +'<input type=\"checkbox\" value=\"'+v+'\"/>
+            +'</li>'
+            ; }},
         /* XXX: what can be done with the routes here? Any graphing needed? */
         'list_routes': function() { return function(v) { if (v.toString() !== '')
           return '<li><pre>'+v[0]+'/'+v[1]+' via '+v[2]+' ('+v[3]+'s)</pre></li>'; }}
       }
+    }
   }
   return classes[ui_class];
 };
