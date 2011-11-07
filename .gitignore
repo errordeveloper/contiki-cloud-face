@@ -2,3 +2,4 @@ alias.csh
 log/
 node_scripts/config.json
 nginx_config/private/
+import/misc/
