@@ -112,7 +112,7 @@ function sel_ui (ui_class) {
       //}
     },
     'pachube': {
-      'plot': function (v) {
+      'input': function (v) {
 
         var url = v.host + 'feeds/' + v.feed + '.json';
 
