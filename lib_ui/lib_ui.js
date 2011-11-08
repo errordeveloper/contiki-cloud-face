@@ -110,6 +110,44 @@ function sel_ui (ui_class) {
 
         }
       //}
+    },
+    'pachube': {
+      'test_plot': function (v) {
+
+        var url = v.host + 'feeds/' + v.feed + '.json';
+
+        var plot_output = document.getElementById(v.output);
+
+        $.getJSON(url, function(data) {
+          var items = [];
+
+          $('<title/>', {
+            html: data.title + ' (' + data.description + ')'
+          }).appendTo('head');
+
+          ui.plot_table_data = new google.visualization.DataTable();
+
+          var plot = ui.plot_table_data;
+          var rows = data.datastreams.length;
+
+          /*
+          data.addColumn('boolean', 'on/off');
+          */
+
+          plot.addColumn('string', 'Timestamp (:at)');
+          plot.addColumn('string', 'Current value (:current_value)');
+          plot.addRows(rows);
+
+          $.each(data.datastreams, function(i, x) {
+             plot.setCell(i, 0, x.at);
+             plot.setCell(i, 1, x.current_value);
+          });
+
+          ui.route_table = new google.visualization.Table(plot_output);
+          ui.route_table.draw(plot, {showRowNumber: true, sort: 'enable'});
+
+        });
+      }
     }
   }
   return classes[ui_class];
@@ -118,7 +156,11 @@ function sel_ui (ui_class) {
 function gen_ui (ui_class, params) {
   var use_ui = sel_ui(ui_class);
 
-  $('head').append('<title>'+use_ui.title+'</title>');
+  if ( use_ui.title ) {
+    $('<title/>', {
+      html: use_ui.title
+    }).appendTo('head');
+  }
 
   var $d = $("<div class='main'/>");
 
