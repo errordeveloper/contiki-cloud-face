@@ -1,4 +1,4 @@
-google.load('visualization', '1', {packages:['table'], uncompressed: true});
+google.load('visualization', '1', {packages:['table', 'corechart']});
 google.load('jquery', '1.6.4');
 
 var ui = {};
@@ -112,7 +112,7 @@ function sel_ui (ui_class) {
       //}
     },
     'pachube': {
-      'test_plot': function (v) {
+      'plot': function (v) {
 
         var url = v.host + 'feeds/' + v.feed + '.json';
 
@@ -138,15 +138,24 @@ function sel_ui (ui_class) {
           plot.addColumn('string', 'Current value (:current_value)');
           plot.addRows(rows);
 
+          //var d = new Date('2011-11-08T08:10:07.948692Z');
           $.each(data.datastreams, function(i, x) {
-             plot.setCell(i, 0, x.at);
-             plot.setCell(i, 1, x.current_value);
+            var date = new Date(x.at);
+            plot.setCell(i, 0, date.toGMTString());
+            plot.setCell(i, 1, x.current_value);
           });
 
-          ui.route_table = new google.visualization.Table(plot_output);
-          ui.route_table.draw(plot, {showRowNumber: true, sort: 'enable'});
+          ui.plot_table = new google.visualization.Table(plot_output);
+          ui.plot_table.draw(plot, {showRowNumber: true, sort: 'enable'});
+
+          $('<div id="chart"/>').appendTo('body');
+          ui.plot = new google.visualization.LineChart(document.getElementById('chart'));
+          ui.plot.draw(plot, {width: 400, height: 240, title: data.title});
 
         });
+      },
+      'replot': function (t) {
+        // TODO: implement polling
       }
     }
   }
@@ -162,9 +171,9 @@ function gen_ui (ui_class, params) {
     }).appendTo('head');
   }
 
-  var $d = $("<div class='main'/>");
+  var d = $("<div class='main'/>");
 
-  $('body').append($d);
+  $('body').append(d);
 
   for ( var k in params ) {
 
