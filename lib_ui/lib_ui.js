@@ -19,8 +19,8 @@ function sel_ui (ui_class) {
          */
         'n': function(v) {
 
-          $('.main').append('<h3>Neighbourhood Nodes:</h3>');
-          $('.main').append('<div id=\"nodes\"></div>');
+          $('.main').append("<h3>Neighbourhood Nodes:</h3>");
+          $('.main').append("<div id='nodes'></div>");
 
 	  ui.node_table_data = new google.visualization.DataTable();
 
@@ -48,7 +48,7 @@ function sel_ui (ui_class) {
 	  ui.node_table = new google.visualization.Table(document.getElementById('nodes'));
 	  ui.node_table.draw(data, {showRowNumber: true, sort: 'disable'});
 
-          $('.main').append('<div id=\"nodes-operations\"></div>');
+          $('.main').append("<div id='nodes-operations'></div>");
 
           /*
           google.visualization.events.addListener(ui.node_table, 'select', function() {
@@ -85,8 +85,8 @@ function sel_ui (ui_class) {
         },
         'r': function(v) {
           /* XXX: what can be done with the routes here? Any fancy needed? */
-          $('.main').append('<h3>Available Routes:</h3>');
-          $('.main').append('<div id=\"routes\"></div>');
+          $('.main').append("<h3>Available Routes:</h3>");
+          $('.main').append("<div id='routes'></div>");
 
           ui.route_table_data =  new google.visualization.DataTable();
 
@@ -120,7 +120,7 @@ function gen_ui (ui_class, params) {
 
   $('head').append('<title>'+use_ui.title+'</title>');
 
-  var $d = $('<div class="main"/>');
+  var $d = $("<div class='main'/>");
 
   $('body').append($d);
 
