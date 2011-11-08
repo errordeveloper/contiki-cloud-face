@@ -34,20 +34,29 @@ HANDLEBARS_DIST_VM = node_modules/handlebars/dist/handlebars.vm.js
 
 EXPORT = .gh-pages/export
 
-$(EXPORT)/handlebars.min.js : node_modules/handlebars
-	cd node_modules/handlebars/ && \
-	rake -f ../../Rakefile.handlebars release && \
-	cd ../../ && \
-	mv $(HANDLEBARS_DIST) $(HANDLEBARS_DIST_VM) $(EXPORT) && \
-	cd $(EXPORT) && \
-	$(UGLIFYJS) handlebars.js > handlebars.min.js && \
-	$(UGLIFYJS) handlebars.vm.js > handlebars.vm.min.js
+## XXX: Well, it took quite a bit of effort to get these
+# goddamn "handlebars" done, hence I leave it here just
+# in case it may be needed! TO BE DELETED SOON, THOUGH.
+#$(EXPORT)/handlebars.min.js : node_modules/handlebars
+#	cd node_modules/handlebars/ && \
+#	rake -f ../../Rakefile.handlebars release && \
+#	cd ../../ && \
+#	mv $(HANDLEBARS_DIST) $(HANDLEBARS_DIST_VM) $(EXPORT) && \
+#	cd $(EXPORT) && \
+#	$(UGLIFYJS) handlebars.js > handlebars.min.js && \
+#	$(UGLIFYJS) handlebars.vm.js > handlebars.vm.min.js
+#
+#$(EXPORT)/cui.js : lib_ui/lib_ui.js $(EXPORT)/handlebars.min.js
+#	printf "\n/* $< */\n" | \
+#		cat $(EXPORT)/handlebars.min.js - $< > $@
 
-$(EXPORT)/cui.js : lib_ui/lib_ui.js $(EXPORT)/handlebars.min.js
-	printf "\n/* $< */\n" | \
-		cat $(EXPORT)/handlebars.min.js - $< > $@
+JSSHA1 = import/misc/jsSHA-1.3/src/sha1.js
 
-export-push : $(EXPORT)/cui.js
+$(EXPORT)/cloud-face-jquery.js : lib_ui/lib_ui.js
+	curl http://www.google.com/jsapi | \
+	cat - $(JSSHA1) $< > $@
+
+export-push : $(EXPORT)/cloud-face-jquery.js
 	cd $(EXPORT) && \
 	git status
 
