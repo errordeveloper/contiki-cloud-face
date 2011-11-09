@@ -1,0 +1,39 @@
+<html><head><title>Test Form</title>
+    <script src='http://google.com/jsapi'></script>
+    <script>
+    google.load('jquery', '1.6.4');
+    var testobject = {};
+    $(document).ready(function() {
+
+      $.fn.extractObject = function() {
+        var accum = {};
+        function add(accum, namev, value) {
+          if (namev.length == 1) {
+            accum[namev[0]] = value;
+          } else {
+            if (accum[namev[0]] == null)
+            accum[namev[0]] = {};
+            add(accum[namev[0]], namev.slice(1), value);
+          }
+        };
+
+        this.find('input, textarea, select').each(function() {
+          add(accum, $(this).attr('name').split('.'), $(this).val());
+        });
+        return accum;
+      }
+
+      testobject = $('#myform').extractObject();
+
+    });
+
+    </script>
+  </head>
+  <body>
+    <form id="myform">
+      Company: <input type="text" name="Company" value="ACME, INC."/>
+      First Name: <input type="text" name="Contact.FirstName" value="Daffy"/>
+      Last Name: <input type="text" name="Contact.LastName" value="Duck"/>
+    </form>
+  </body>
+</html>
