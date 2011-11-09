@@ -4,12 +4,14 @@
     <link rel="stylesheet" type="text/css" href="../../import/misc/formation-1.1.0/css/formation.css" />
     <script>
 
+var feed = {};
+
 var pachube = {
-  index: [
+  index: {
   "required" : 0,
   "settable" : 1,
   "whattype" : 2
-  ],
+  },
   proto: {
       "title"       : [true, true, "string"],
       "id"          : [false, false, "integer"],
@@ -31,6 +33,7 @@ var pachube = {
     'tags' : {
       // define tags here ...
     }
+  }
 }
 
 
@@ -40,7 +43,7 @@ var pachube = {
             //$("#feed").formation();
             $.formation.addInput({ type:"text", required:true,
               labelValue:"Feed Title:",
-              id: 'title_field',
+              id: 'title',
               name: 'title',
               defaultValue:"Test Feed ..."});
 
@@ -48,40 +51,22 @@ var pachube = {
               labelValue:"Website URL:",
               validation:'url',
               name: 'website',
-              id: 'website_field',
+              id: 'website',
               defaultValue:"http://www.sics.se/contiki/"});
 
             $.formation.addInput({ type:"text", // required:true,
               labelValue:"Tags: URL:",
               name: 'tags',
-              id: 'tags_field',
+              id: 'tags',
               defaultValue:"a; b; ..."});
 
             /*
             $.formation.addInput({type:"text",labelValue:"E-mail:",validation:'email',required:true});
             $.formation.addInput({type:"text",labelValue:"Age:",validation:"number"});
-            $.formation.addRadios(["Mac","Linux","Windows","Ubuntu"],{
-                            required:true,
-                            labelValue:"Your favorite OS:",
-                            legend:"Operating Systems"
-            });
+            $.formation.addRadios(["vi","emacs"],{ required:true, labelValue:"Your favorite Editor?:", legend:"ed"});
             $.formation.addCheckboxes({"apples":"Apples","oranges":"Oranges","grapes":"Grapes"},
                                       {labelValue:"What do you like to eat?",required:false,legend:"Fruit!"});
-            $.formation.addCaptcha({
-                    captchaQuestions: {
-                            '5 + 5 = ?' : '10',
-                            'What color is the sky?':'blue',
-                            '2 + 2 = ?' : '4'
-                            },
-                    required:true
-            });
-            $.formation.addTextarea({
-                    name:"my_textarea",
-                    labelValue:"Describe yourself",
-                    required:true,
-                    cols:"60",
-                    rows:"10"
-            });
+            $.formation.addTextarea({ name:"my_textarea", labelValue:"Describe yourself", required:true, cols:"60", rows:"10" });
             $.formation.addSelect({'1':'Yes','2':'No'},{labelValue:'Do you like jQuery?',required:true});
             $.formation.setErrorMessages({number:"Please enter a number."});
             */
@@ -93,7 +78,16 @@ var pachube = {
 
     });
     function call_test() {
-      console.log($('#title').prop('value'));
+
+      feed.title =$('#title').prop('value');
+      console.log('title: '+feed.title);
+
+      feed.website =$('#website').prop('value');
+      console.log('website: '+feed.website);
+
+      feed.tags =$('#tags').prop('value').split(';');
+      console.log('tags: '+feed.tags);
+
     }
     </script>
     </head>
