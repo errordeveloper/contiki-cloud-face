@@ -40,3 +40,6 @@
 [submodule "import/json-schema"]
 	path = import/json-schema
 	url = git://github.com/kriszyp/json-schema
+[submodule "node_modules/commonjs-utils"]
+	path = node_modules/commonjs-utils
+	url = git://github.com/kriszyp/commonjs-utils.git
