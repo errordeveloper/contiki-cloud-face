@@ -28,3 +28,15 @@
 [submodule "node_modules/less"]
 	path = node_modules/less
 	url = git://github.com/cloudhead/less.js.git
+[submodule "node_modules/schema"]
+	path = node_modules/schema
+	url = git://github.com/akidee/schema.js
+[submodule "import/JSV"]
+	path = import/JSV
+	url = git://github.com/garycourt/JSV
+[submodule "import/JSVForms"]
+	path = import/JSVForms
+	url = git://github.com/garycourt/JSVForms
+[submodule "import/json-schema"]
+	path = import/json-schema
+	url = git://github.com/kriszyp/json-schema
