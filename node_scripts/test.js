@@ -1,6 +1,6 @@
 var FS = require ('fs');
 
-var req = require ('request');
+var http = require ('http');
 var util = require ('util');
 var flags = require ('optimist')
 
@@ -17,26 +17,42 @@ var flags = require ('optimist')
             .options('host',
                 { describe: 'server host to connect to',
                   alias: [ 'h' ],
-                  default: '::1'})
+                  default: 'localhost'})
 
             .usage('Usage: $0')
             .argv;
 
-conf = JSON.parse(FS.readFileSync(flags.conf));
+// If local proxy is in use, it should have the API key already!
+if ( flags.host !== 'localhost' ) {
 
-var apik = conf['pachube_api_key'];
+  conf = JSON.parse(FS.readFileSync(flags.conf));
 
-console.log('Read API key \"' + apik + '\" from \'' + flags.conf + '\'.');
+  var apik = conf['pachube_api_key'];
 
-var url = 'http://'+ flags.host +':'+ flags.port +'';
+  console.log('Read API key \"' + apik + '\" from \'' + flags.conf + '\'.');
 
-console.log('Will try ' + url);
+}
 
-req(url, function(error, response, body) {
-          if (!error && response.statusCode === 200) {
-            console.log(body);
-          } else if (!error) {
-            console.error(util.inspect(response));
-            console.error('>> Error (' + response.statusCode + ') <<');
-          } else { throw error; }
+
+
+var opt = {
+  host: flags.host,
+  port: flags.port,
+  path: '/',
+  //method: 'GET',
+  agent: false
+};
+
+
+console.log('GET http://'+ opt.host +':'+ opt.port + opt.path);
+
+http.get(opt, function(res) {
+
+    console.log('STATUS: ' + res.statusCode);
+    console.log('HEADERS: ' + util.inspect(res.headers));
+    res.on('data', function (chunk) {
+      console.log('BODY: ' + chunk);
+    });
+}).on('error', function(e) {
+    console.log("Got error: " + e.message);
 });
